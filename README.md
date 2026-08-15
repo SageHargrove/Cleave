@@ -126,7 +126,7 @@ real customer data.
 |---|---|
 | Python | ~43,700 lines |
 | TypeScript / React | ~13,700 lines |
-| Tests | 1,045, all green |
+| Tests | 1,076, all green |
 | Engine coverage | 98.4% (gate requires 85%) |
 | Schema | 24 tables, 4 stacked migrations |
 | Dependencies | fully pinned and hashed, SBOM published, `pip-audit` clean |
@@ -152,7 +152,7 @@ specs, and a task list **before** any code is written, then gets archived into a
 permanent spec once it ships. Requirement IDs (`FR-ING-7`, `NFR-2`) are the
 contract, and commits cite them.
 
-Twelve changes shipped this way. The archived design documents are the reason
+Thirteen changes shipped this way. The archived design documents are the reason
 [decisions/](decisions/) could be written at all: the reasoning was recorded
 while it was still fresh, including the parts that turned out to be wrong.
 
