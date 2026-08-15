@@ -1,4 +1,5 @@
 # Files in this folder that should NOT be published to cleavehq.com.
-# Without this, the deploy notes below would be readable at
-# https://cleavehq.com/README.md
+# Without this, the deploy notes and the card source would be readable at
+# https://cleavehq.com/README.md and /_og-template.html
 README.md
+_og-template.html

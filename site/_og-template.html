@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>og card source</title>
+<!--
+  Source for og.png, the 1200x630 social preview card. Not published (see
+  .assetsignore). Regenerate by screenshotting #card at exactly 1200x630.
+  Kept in the repo so the card can be rebuilt when the headline changes,
+  rather than being an orphan binary nobody can reproduce.
+-->
+<style>
+  :root {
+    --ink: #e6eaed;
+    --ink-2: #9aa7b1;
+    --ground: #0e1317;
+    --accent: #46a79e;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #222; }
+  #card {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--mono);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  /* the mark's cleft geometry, same 19deg as everywhere else */
+  .band { position: absolute; top: -20%; height: 140%; transform: rotate(19deg); }
+  .band-a {
+    left: 12%; width: 300px;
+    background: linear-gradient(to bottom, transparent,
+      color-mix(in oklab, var(--accent) 15%, transparent) 30%,
+      color-mix(in oklab, var(--accent) 15%, transparent) 70%, transparent);
+  }
+  .band-b {
+    right: 10%; width: 210px;
+    background: linear-gradient(to bottom, transparent,
+      color-mix(in oklab, var(--ink) 8%, transparent) 30%,
+      color-mix(in oklab, var(--ink) 8%, transparent) 70%, transparent);
+  }
+  .in { position: relative; padding: 0 70px; }
+  .identity { display: flex; align-items: center; justify-content: center; gap: 26px; margin-bottom: 12px; }
+  .word { font-family: var(--serif); font-weight: 700; font-size: 120px; line-height: 1; letter-spacing: -0.03em; }
+  .tag { font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--ink-2); margin-bottom: 40px; }
+  .hed { font-family: var(--serif); font-weight: 700; font-size: 44px; line-height: 1.16; letter-spacing: -0.01em; margin: 0 auto 34px; max-width: 20ch; }
+  .claims { display: flex; justify-content: center; gap: 40px; font-size: 19px; color: var(--ink-2); }
+  .claims b { color: var(--ink); font-weight: 600; }
+  .dot { color: var(--accent); margin-right: 9px; font-size: 14px; vertical-align: 2px; }
+</style>
+</head>
+<body>
+<div id="card">
+  <span class="band band-a"></span>
+  <span class="band band-b"></span>
+  <div class="in">
+    <div class="identity">
+      <svg width="96" height="96" viewBox="0 0 22 22" aria-hidden="true">
+        <path d="M10 1 L3 21 L8 21 L15 1 Z" fill="#46a79e" />
+        <path d="M14 1 L19 1 L12 21 L7 21 Z" fill="#e6eaed" opacity=".55" />
+      </svg>
+      <span class="word">Cleave</span>
+    </div>
+    <div class="tag">The analysis layer for identity.</div>
+    <h1 class="hed">See the whole access picture. Keep it on your machine.</h1>
+    <div class="claims">
+      <span><span class="dot">&#9679;</span><b>Local-first.</b></span>
+      <span><span class="dot">&#9679;</span><b>Deterministic.</b></span>
+      <span><span class="dot">&#9679;</span><b>Read-only.</b></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
