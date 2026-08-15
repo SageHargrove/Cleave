@@ -61,6 +61,8 @@
     --gutter: 190px;
     --measure: 66ch;
     --page: 1180px;
+    /* masthead height, so the landing can fill exactly one viewport under it */
+    --header-h: 62px;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -274,6 +276,8 @@
      reachable only by scrolling to the footer. */
   .cl-navrow { display: none; }
   @media (max-width: 760px) {
+    /* the section-nav row appears below the masthead at this width */
+    :root { --header-h: 97px; }
     .cl-nav { display: none; }
     .cl-navrow {
       display: flex;
@@ -324,7 +328,13 @@
   .cl-landing {
     position: relative;
     overflow: hidden;
-    padding: 96px 0 88px;
+    /* exactly one viewport under the masthead. svh, not vh, so mobile browser
+       chrome does not push the scroll cue off screen. */
+    min-height: calc(100svh - var(--header-h));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 56px 0 92px;
     border-bottom: 1px solid var(--rule-soft);
   }
   .cl-landing-in {
@@ -336,6 +346,30 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+  /* scroll cue: the "there is more below" affordance */
+  .cl-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 26px;
+    transform: translateX(-50%);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-decoration: none;
+    padding: 6px 10px;
+  }
+  .cl-cue:hover { color: var(--ink-2); }
+  .cl-cue svg { animation: cl-cue-bob 2.4s ease-in-out infinite; }
+  @keyframes cl-cue-bob {
+    0%, 100% { transform: translateY(0); opacity: 0.75; }
+    50%      { transform: translateY(4px); opacity: 1; }
   }
   .cl-cleft { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
   .cl-cleft span { position: absolute; top: -20%; height: 140%; transform: rotate(19deg); }
@@ -407,10 +441,58 @@
     vertical-align: 1px;
   }
   @media (max-width: 720px) {
-    .cl-landing { padding: 62px 0 56px; }
+    .cl-landing { padding: 40px 0 76px; }
     .cl-identity { gap: 13px; }
     .cl-cleft { display: none; }
     .cl-claims { gap: 6px 22px; }
+  }
+
+  /* ---------- the cleave animation ----------
+     Ported from the app (lab round 3, option A). The mark holds still; the
+     WORD is cleaved: a blade strikes along the mark's own cleft angle, the
+     halves part the way the wedges sit, and the word closes again. Plays on
+     load and on hover. */
+  .cleave-dw { position: relative; display: inline-block; }
+  .cleave-dw .cleave-spacer { visibility: hidden; }
+  .cleave-dw .cleave-piece { position: absolute; inset: 0; }
+  .cleave-dw .cleave-pl { clip-path: polygon(-2% -10%, 60% -10%, 42% 110%, -2% 110%); }
+  .cleave-dw .cleave-pr { clip-path: polygon(60% -10%, 103% -10%, 103% 110%, 42% 110%); }
+  .cleave-dw .cleave-blade {
+    position: absolute;
+    top: -14%;
+    bottom: -14%;
+    left: 50%;
+    width: 1.5px;
+    background: var(--accent);
+    transform: rotate(19deg) scaleY(0);
+    transform-origin: center;
+    pointer-events: none;
+  }
+  .cleave-dw.go .cleave-blade { animation: cleaveA-blade 0.95s cubic-bezier(0.55, 0, 0.25, 1) both; }
+  .cleave-dw.go .cleave-pl    { animation: cleaveA-l     0.95s cubic-bezier(0.55, 0, 0.25, 1) both; }
+  .cleave-dw.go .cleave-pr    { animation: cleaveA-r     0.95s cubic-bezier(0.55, 0, 0.25, 1) both; }
+  @keyframes cleaveA-blade {
+    0%        { transform: rotate(19deg) scaleY(0); opacity: 1; }
+    22%       { transform: rotate(19deg) scaleY(1); opacity: 1; }
+    55%       { opacity: 1; }
+    80%, 100% { opacity: 0; }
+  }
+  @keyframes cleaveA-l {
+    0%, 20% { transform: none; }
+    42%     { transform: translate(-0.1em, -0.07em); }
+    62%     { transform: translate(-0.1em, -0.07em); }
+    100%    { transform: none; }
+  }
+  @keyframes cleaveA-r {
+    0%, 20% { transform: none; }
+    42%     { transform: translate(0.1em, 0.07em); }
+    62%     { transform: translate(0.1em, 0.07em); }
+    100%    { transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cleave-dw .cleave-piece,
+    .cleave-dw .cleave-blade { animation: none !important; }
+    .cl-cue svg { animation: none; }
   }
 
   /* ---------- hero graphic ---------- */
@@ -702,7 +784,12 @@
               <path class="a" d="M10 1 L3 21 L8 21 L15 1 Z" />
               <path class="b" d="M14 1 L19 1 L12 21 L7 21 Z" />
             </svg>
-            <span class="cl-wordmark">Cleave</span>
+            <span class="cl-wordmark cleave-dw" data-cleave aria-label="Cleave">
+              <span class="cleave-spacer">Cleave</span>
+              <span class="cleave-piece cleave-pl" aria-hidden="true">Cleave</span>
+              <span class="cleave-piece cleave-pr" aria-hidden="true">Cleave</span>
+              <span class="cleave-blade" aria-hidden="true"></span>
+            </span>
           </div>
           <p class="cl-tagline">The analysis layer for identity.</p>
           <h1 class="cl-landing-h1" id="cl-landing-h1">
@@ -723,10 +810,17 @@
             <li><b>Read-only.</b> Never touches provisioning</li>
           </ul>
         </div>
+        <a class="cl-cue" href="#effective">
+          <span>What it finds</span>
+          <svg width="16" height="10" viewBox="0 0 16 10" aria-hidden="true" fill="none">
+            <path d="M1 1 L8 8 L15 1" stroke="currentColor" stroke-width="1.6"
+                  stroke-linecap="square" />
+          </svg>
+        </a>
       </section>
 
       <div class="cl-wrap">
-        <section class="cl-hero cl-fault">
+        <section class="cl-hero cl-fault" id="effective">
           <div class="cl-label">Effective access</div>
           <div class="cl-body">
             <h2 class="cl-h2">One group was granted.<br />Forty-seven things were reached.</h2>
@@ -1341,6 +1435,34 @@
       sync();
     });
     sync();
+  })();
+
+  /* ---- the cleave animation ----------------------------------------------
+     Plays once on load and again on hover, matching the app. The CSS carries
+     the reduced-motion opt-out, so this only toggles a class. */
+  (function () {
+    var els = document.querySelectorAll("[data-cleave]");
+    if (!els.length) return;
+
+    function play(el) {
+      if (el._clTimer) clearTimeout(el._clTimer);
+      el.classList.remove("go");
+      // Two frames: let the class removal commit so the animation restarts
+      // rather than being treated as still-running.
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          el.classList.add("go");
+          el._clTimer = setTimeout(function () {
+            el.classList.remove("go");
+          }, 1050);
+        });
+      });
+    }
+
+    els.forEach(function (el) {
+      el.addEventListener("mouseenter", function () { play(el); });
+      play(el);
+    });
   })();
 </script>
 
