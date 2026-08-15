@@ -1,0 +1,27 @@
+# This repository holds documentation, screenshots, and decision records only.
+# No product source, and above all no project data.
+
+# Cleave project files are customer access data. Never commit one.
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.db
+*.db-wal
+*.db-shm
+*.csv
+*.xlsx
+
+# Environment / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
