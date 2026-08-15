@@ -1,0 +1,17 @@
+{
+  // Deploys cleavehq.com from this repo's `site/` folder as a static-asset
+  // Worker. There is no `main` entry on purpose: nothing here runs server-side,
+  // it is plain HTML served from Cloudflare's edge.
+  //
+  // Cloudflare retired the standalone Pages creation flow and redirects to
+  // Workers, so this config is what makes `npx wrangler deploy` publish the
+  // site rather than looking for a script.
+  "name": "cleave",
+  "compatibility_date": "2026-08-14",
+  "assets": {
+    "directory": "./site",
+    // The site is hash-routed (#security, #privacy, …), so any unmatched path
+    // should still return the one real page rather than a 404.
+    "not_found_handling": "single-page-application"
+  }
+}

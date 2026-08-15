@@ -3,23 +3,27 @@
 The marketing site. A single self-contained `index.html` with no build step, no
 external requests, and no analytics.
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Workers static assets)
 
-This folder is a **subdirectory** of the `cleave` repo, so the Pages project has
-to be pointed at it:
+Cloudflare retired the standalone Pages creation flow, so this deploys as a
+**static-asset Worker**. [`wrangler.jsonc`](../wrangler.jsonc) in the repo root
+does the work: it points at `./site`, and declares no `main` script because
+nothing here runs server-side.
 
-1. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**,
+1. Cloudflare dashboard → **Compute (Workers) → Create → Import a repository**,
    and pick the `cleave` repo.
-2. Build settings:
-   - **Root directory:** `site`
-   - **Framework preset:** None
+2. Settings:
+   - **Project name:** `cleave`, matching `name` in `wrangler.jsonc`
    - **Build command:** *(empty)*
-   - **Build output directory:** `/`
-3. **Custom domains** → add `cleavehq.com` and `www.cleavehq.com`. DNS and TLS
-   are automatic, since the zone is already on Cloudflare.
+   - **Deploy command:** `npx wrangler deploy`
+   - **Root directory:** *(leave blank)* — `wrangler.jsonc` already points at
+     `site/`, so setting this too would double up the path
+3. Deploy, confirm the `*.workers.dev` URL serves the site.
+4. Worker → **Settings → Domains & Routes → Add → Custom domain**, add
+   `cleavehq.com`, then repeat for `www.cleavehq.com`. DNS and TLS are
+   automatic, since the zone is already on Cloudflare.
 
-The root directory setting is the one that matters. Without it, Pages publishes
-the repo root and serves the showcase README instead of the site.
+Pushing to `main` redeploys automatically.
 
 ## Files
 
