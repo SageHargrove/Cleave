@@ -30,7 +30,6 @@ decision record.
 | [ENGINEERING.md](ENGINEERING.md) | The CI gate, testing strategy, supply-chain posture |
 | [decisions/](decisions/) | Eight decisions with the measurements that drove them |
 | [screenshots/](screenshots/) | Every view, light and dark |
-| [sample-report.pdf](sample-report.pdf) | A real generated report, from synthetic data |
 | [synthgen/](synthgen/) | The synthetic data generator, MIT licensed. Real code you can read and run. |
 | [site/](site/) | Source of [cleavehq.com](https://cleavehq.com) |
 
