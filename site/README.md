@@ -29,8 +29,16 @@ Pushing to `main` redeploys automatically.
 
 - `index.html` — the whole site (hash-routed pages: security, privacy, terms,
   accessibility).
-- `_redirects` — sends unknown paths to `/`; real files take precedence.
 - `robots.txt`, `sitemap.xml` — single-URL SEO plumbing.
+- `.assetsignore` — keeps this README from being served at `/README.md`.
+
+There is deliberately **no `_redirects` file.** Under Pages, `_redirects` was
+evaluated after static assets, so `/* / 302` was a harmless catch-all. Under
+Workers static assets it is evaluated *first*, so that rule matched `/` itself
+and redirected the homepage to itself forever. `not_found_handling:
+"single-page-application"` in [`wrangler.jsonc`](../wrangler.jsonc) does the
+same job correctly: unmatched paths serve `index.html` with a 200 instead of
+bouncing. Do not reintroduce `_redirects` without testing the root path.
 
 ## Before sharing widely
 

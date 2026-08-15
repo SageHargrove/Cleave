@@ -1,0 +1,4 @@
+# Files in this folder that should NOT be published to cleavehq.com.
+# Without this, the deploy notes below would be readable at
+# https://cleavehq.com/README.md
+README.md
