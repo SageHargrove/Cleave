@@ -1399,9 +1399,21 @@
       var hash = window.location.hash || "";
       // Section anchors on the home page keep their normal behaviour.
       if (hash && hash.indexOf("#/") !== 0) {
+        // Smooth scrolling is right when the reader is already on the home
+        // page: it shows them the distance they moved. It is wrong when they
+        // came from Security or Privacy, because that is a page change, not a
+        // scroll, and animating it drags them through the full-height landing
+        // before the section they asked for arrives.
+        var home = document.getElementById("page-home");
+        var wasHome = home && !home.classList.contains("cl-hide");
         show("home");
         var target = document.getElementById(hash.slice(1));
-        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (target) {
+          target.scrollIntoView({
+            behavior: wasHome ? "smooth" : "auto",
+            block: "start",
+          });
+        }
         return;
       }
       var name = hash.replace("#/", "") || "home";
