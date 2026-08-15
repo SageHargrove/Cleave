@@ -1,5 +1,6 @@
-# This repository holds documentation, screenshots, and decision records only.
-# No product source, and above all no project data.
+# This repository holds documentation, screenshots, the marketing site, and the
+# MIT-licensed synthetic data generator. No product source, and above all no
+# project data.
 
 # Cleave project files are customer access data. Never commit one.
 *.sqlite
@@ -9,8 +10,28 @@
 *.db
 *.db-wal
 *.db-shm
+
+# Generator output (synthgen writes CSVs and a ground-truth document)
+/synthgen/synthetic-company/
+/synthgen/company/
+/synthgen/out/
+/synthgen/a/
+/synthgen/b/
+ground_truth.json
 *.csv
 *.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
 
 # Environment / secrets
 .env

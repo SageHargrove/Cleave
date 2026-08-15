@@ -76,7 +76,7 @@ could be lifted out and run anywhere.
 The synthetic generator is a development tool sitting outside the product
 layering, not a runtime dependency. The bridge between the two lives in `tests/`,
 so neither imports the other. This is why the generator
-[extracts cleanly](https://github.com/SageHargrove/cleave-synthgen) into a
+[extracts cleanly](synthgen/) into a
 standalone MIT package: it was never entangled in the first place.
 
 ## Other structural seams

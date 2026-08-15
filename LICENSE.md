@@ -15,10 +15,12 @@ domain and are not offered under an open-source license.
 
 ## What is separately open source
 
-The synthetic identity-data generator described in these documents is released
-under the MIT license as a standalone project:
+The `synthgen/` directory is an exception to the above. It is released under the
+**MIT license** and carries its own [LICENSE](synthgen/LICENSE) file, which
+governs it. You may use, modify, and redistribute it freely.
 
-**https://github.com/SageHargrove/cleave-synthgen**
+It generates synthetic test data and performs no analysis, so it is separable
+from the product without giving any of the product away.
 
 ## Screenshots and sample data
 

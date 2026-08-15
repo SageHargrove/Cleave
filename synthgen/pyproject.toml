@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cleave-synthgen"
+version = "1.0.0"
+description = "Deterministic synthetic identity and entitlement data, with ground truth, in real vendor export formats"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Sage Hargrove" }]
+keywords = [
+  "identity",
+  "iam",
+  "iga",
+  "entitlements",
+  "rbac",
+  "role-mining",
+  "synthetic-data",
+  "test-data",
+  "active-directory",
+  "sailpoint",
+  "entra",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security",
+  "Topic :: Software Development :: Testing",
+  "Typing :: Typed",
+]
+
+# No runtime dependencies. The standard library is the entire requirement.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11"]
+
+[project.urls]
+Homepage = "https://github.com/SageHargrove/cleave-synthgen"
+Source = "https://github.com/SageHargrove/cleave-synthgen"
+
+[project.scripts]
+synthgen = "synthgen.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["synthgen"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# OOXML namespace URIs are single unbreakable tokens; wrapping them would make
+# the XML constants harder to read, not easier.
+"synthgen/dialects/base.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["synthgen"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

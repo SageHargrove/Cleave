@@ -1,0 +1,2 @@
+# Unknown paths land on the page (routing is hash-based); real files win.
+/* / 302

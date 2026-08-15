@@ -82,6 +82,6 @@ outlier golden file's findings block is byte-identical, with only the recorded
 The intuitive grouping was wrong by a factor of thirteen, and it survived because
 the gate was quietly configured around it. Ground truth is what caught it. This
 is the strongest argument for having built the
-[synthetic generator](https://github.com/SageHargrove/cleave-synthgen) first: an
+[synthetic generator](../synthgen/) first: an
 algorithm scoring 0.06 looks perfectly reasonable in a UI, and no amount of
 eyeballing candidate roles would have revealed it.

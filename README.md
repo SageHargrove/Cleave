@@ -31,11 +31,12 @@ decision record.
 | [decisions/](decisions/) | Eight decisions with the measurements that drove them |
 | [screenshots/](screenshots/) | Every view, light and dark |
 | [sample-report.pdf](sample-report.pdf) | A real generated report, from synthetic data |
+| [synthgen/](synthgen/) | The synthetic data generator, MIT licensed. Real code you can read and run. |
+| [site/](site/) | Source of [cleavehq.com](https://cleavehq.com) |
 
-Related public repo: **[cleave-synthgen](https://github.com/SageHargrove/cleave-synthgen)**,
-the deterministic synthetic identity-data generator, extracted from Cleave and
-released under MIT. Everything you see below was measured against data it
-produced.
+Every number and screenshot below was measured against data
+[synthgen](synthgen/) produced, so all of it is reproducible and none of it is
+anyone's real access data.
 
 ---
 
@@ -163,6 +164,8 @@ Copyright © 2026. All rights reserved.
 
 The documentation, screenshots, and decision records in this repository are
 published for evaluation and reference. Cleave itself is proprietary and its
-source is not included here. The synthetic data generator is separately
-available under the MIT license at
-[cleave-synthgen](https://github.com/SageHargrove/cleave-synthgen).
+source is not included here.
+
+**Exception:** [`synthgen/`](synthgen/) is MIT licensed and free to use, with its
+own [LICENSE](synthgen/LICENSE). It generates fake data and analyzes nothing, so
+it gives away none of the product.
