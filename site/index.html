@@ -317,6 +317,102 @@
   }
   .cl-btn-ghost:hover { border-color: var(--accent); color: var(--accent); filter: none; }
 
+  /* ---------- landing ----------
+     Ported from the app's landing portal (design round L8, "monolith"):
+     centred identity over the mark's own cleft geometry at architectural
+     scale. The site and the app now open on the same face. */
+  .cl-landing {
+    position: relative;
+    overflow: hidden;
+    padding: 96px 0 88px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .cl-landing-in {
+    position: relative;
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .cl-cleft { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .cl-cleft span { position: absolute; top: -20%; height: 140%; transform: rotate(19deg); }
+  .cl-cleft-a {
+    left: 14%; width: 240px;
+    background: linear-gradient(to bottom, transparent,
+      color-mix(in oklab, var(--accent) 13%, transparent) 30%,
+      color-mix(in oklab, var(--accent) 13%, transparent) 70%, transparent);
+  }
+  .cl-cleft-b {
+    right: 12%; width: 170px;
+    background: linear-gradient(to bottom, transparent,
+      color-mix(in oklab, var(--ink) 7%, transparent) 30%,
+      color-mix(in oklab, var(--ink) 7%, transparent) 70%, transparent);
+  }
+  .cl-identity {
+    display: flex; align-items: center; justify-content: center;
+    gap: 20px; margin-bottom: 10px;
+  }
+  .cl-mark-xl { flex: none; }
+  .cl-wordmark {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(54px, 9vw, 92px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .cl-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-2);
+    margin: 0 0 26px;
+  }
+  .cl-landing-h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(25px, 3.3vw, 31px);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    max-width: 24ch;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  .cl-landing-lede {
+    font-size: 15.5px;
+    line-height: 1.62;
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin: 0 0 26px;
+  }
+  .cl-claims {
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 32px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .cl-claims b { color: var(--ink); font-weight: 600; }
+  .cl-claims li::before {
+    content: "\25CF";
+    color: var(--accent);
+    margin-right: 7px;
+    font-size: 10px;
+    vertical-align: 1px;
+  }
+  @media (max-width: 720px) {
+    .cl-landing { padding: 62px 0 56px; }
+    .cl-identity { gap: 13px; }
+    .cl-cleft { display: none; }
+    .cl-claims { gap: 6px 22px; }
+  }
+
   /* ---------- hero graphic ---------- */
   .cl-hero { padding: 66px 0 60px; }
   .cl-resolve {
@@ -595,11 +691,45 @@
   <main id="main">
     <!-- ==================== HOME ==================== -->
     <div id="page-home">
+      <section class="cl-landing" aria-labelledby="cl-landing-h1">
+        <div class="cl-cleft" aria-hidden="true">
+          <span class="cl-cleft-a"></span>
+          <span class="cl-cleft-b"></span>
+        </div>
+        <div class="cl-landing-in">
+          <div class="cl-identity">
+            <svg class="cl-mark cl-mark-xl" width="74" height="74" viewBox="0 0 22 22" aria-hidden="true">
+              <path class="a" d="M10 1 L3 21 L8 21 L15 1 Z" />
+              <path class="b" d="M14 1 L19 1 L12 21 L7 21 Z" />
+            </svg>
+            <span class="cl-wordmark">Cleave</span>
+          </div>
+          <p class="cl-tagline">The analysis layer for identity.</p>
+          <h1 class="cl-landing-h1" id="cl-landing-h1">
+            See the whole access picture. Keep it on your machine.
+          </h1>
+          <p class="cl-landing-lede">
+            Every IGA, IDP, directory, and app already exports its data. Cleave
+            ingests it all, resolves who can actually reach what, and shows the
+            picture no single vendor structurally can.
+          </p>
+          <div class="cl-btnrow">
+            <a class="cl-btn" href="mailto:hello@cleavehq.com?subject=Cleave%20early%20access">Request access &rarr;</a>
+            <a class="cl-btn cl-btn-ghost" href="#how">How it works</a>
+          </div>
+          <ul class="cl-claims">
+            <li><b>Local-first.</b> Nothing leaves this machine</li>
+            <li><b>Deterministic.</b> Every finding carries its why</li>
+            <li><b>Read-only.</b> Never touches provisioning</li>
+          </ul>
+        </div>
+      </section>
+
       <div class="cl-wrap">
         <section class="cl-hero cl-fault">
           <div class="cl-label">Effective access</div>
           <div class="cl-body">
-            <h1 class="cl-h1">One group was granted.<br />Forty-seven things were reached.</h1>
+            <h2 class="cl-h2">One group was granted.<br />Forty-seven things were reached.</h2>
             <p class="cl-lede">
               Every IGA, directory, and app can tell you what it granted. None of
               them can tell you what that grant actually reaches once nested
@@ -607,10 +737,6 @@
               effective access across all of them, and shows you the picture no
               single vendor structurally can.
             </p>
-            <div class="cl-btnrow">
-              <a class="cl-btn" href="mailto:hello@cleavehq.com?subject=Cleave%20early%20access">Request access</a>
-              <a class="cl-btn cl-btn-ghost" href="#how">How it works</a>
-            </div>
 
             <figure class="cl-resolve">
               <figcaption class="cl-resolve-head">
