@@ -1,5 +1,10 @@
 # Files in this folder that should NOT be published to cleavehq.com.
 # Without this, the deploy notes and the card source would be readable at
 # https://cleavehq.com/README.md and /_og-template.html
-README.md
-_og-template.html
+#
+# The leading slash anchors each rule to this folder. Unanchored, `README.md`
+# also matched `manual/README.md`, which is the index page the demo's in-app
+# Help fetches first: it was served the marketing page instead and could not
+# parse it.
+/README.md
+/_og-template.html
