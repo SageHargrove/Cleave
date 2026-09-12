@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- The cleave mark: one block, split clean, still holding together. -->
+  <rect width="32" height="32" rx="7" fill="#1b1b18"/>
+  <path d="M7 25 L19.5 6 h5.5 L12.5 25 Z" fill="#63b092"/>
+  <path d="M15 25 L25 10 V17.5 L20 25 Z" fill="#b7b3a6"/>
+</svg>

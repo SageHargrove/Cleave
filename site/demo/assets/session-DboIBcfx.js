@@ -1,0 +1,1 @@
+const n={token:null,ended:!1},s=new Set;function t(){for(const e of s)e()}function o(){return n.token}function d(e){n.token=e,n.ended=!1,t()}function i(){n.ended||(n.ended=!0,t())}function r(e){return s.add(e),()=>s.delete(e)}function u(){return n.ended?"ended":n.token===null?"missing":"ready"}export{o as a,r as b,u as c,i as m,d as s};

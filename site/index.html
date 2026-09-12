@@ -739,6 +739,74 @@
   }
 
   .cl-hide { display: none; }
+
+  /* ---------- the screen tour ----------
+     Real captures, not mockups: `nox -s shots` regenerates them from the
+     sample project, so what a visitor sees is what the build produces.
+     Without JavaScript every figure simply stacks; the picker is revealed
+     only once the controller has upgraded it, so nothing is ever a dead
+     control. */
+  .cl-tour { margin: 26px 0 0; }
+  .cl-tourpick {
+    display: none;
+    gap: 2px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule-soft);
+    border-bottom: 1px solid var(--rule-soft);
+    padding: 6px 0;
+    margin: 0 0 18px;
+  }
+  .cl-tour-on .cl-tourpick { display: flex; }
+  .cl-tourbtn {
+    appearance: none;
+    background: none;
+    border: 1px solid transparent;
+    color: var(--ink-2);
+    font: 500 12.5px/1 var(--sans);
+    letter-spacing: 0.01em;
+    padding: 7px 11px;
+    cursor: pointer;
+  }
+  .cl-tourbtn:hover { color: var(--ink); border-color: var(--rule); }
+  .cl-tourbtn[aria-selected="true"] {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .cl-tourbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .cl-shot { margin: 0 0 30px; }
+  .cl-tour-on .cl-shot { display: none; margin-bottom: 0; }
+  .cl-tour-on .cl-shot.is-on { display: block; }
+  .cl-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    background: var(--surface);
+  }
+  .cl-cap {
+    font: 400 13.5px/1.55 var(--sans);
+    color: var(--ink-2);
+    margin: 10px 0 0;
+    max-width: var(--measure);
+  }
+  .cl-cap b { color: var(--ink); font-weight: 600; }
+
+  /* The capture exists in both themes, so the page shows the one the reader
+     is actually in. Same three-block shape as the colour tokens above: the
+     site's own toggle has to win over the OS preference in both directions. */
+  .cl-shot-l { }
+  .cl-shot-d { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .cl-shot-l { display: none; }
+    :root:not([data-theme="light"]) .cl-shot-d { display: block; }
+  }
+  :root[data-theme="dark"] .cl-shot-l { display: none; }
+  :root[data-theme="dark"] .cl-shot-d { display: block; }
+  :root[data-theme="light"] .cl-shot-l { display: block; }
+  :root[data-theme="light"] .cl-shot-d { display: none; }
+
 </style>
 
 <div class="cl-root">
@@ -755,6 +823,7 @@
       </a>
       <nav class="cl-nav" aria-label="Primary">
         <a class="cl-navlink" href="#findings">What it finds</a>
+        <a class="cl-navlink" href="#see">See it</a>
         <a class="cl-navlink" href="#how">How it works</a>
         <a class="cl-navlink" href="#local">Local-first</a>
         <a class="cl-navlink" href="#/security" data-route>Security</a>
@@ -768,6 +837,7 @@
     <div class="cl-wrap">
       <nav class="cl-navrow" aria-label="Sections">
         <a class="cl-navlink" href="#findings">What it finds</a>
+        <a class="cl-navlink" href="#see">See it</a>
         <a class="cl-navlink" href="#how">How it works</a>
         <a class="cl-navlink" href="#local">Local-first</a>
         <a class="cl-navlink" href="#/security" data-route>Security</a>
@@ -806,8 +876,8 @@
             picture no single vendor structurally can.
           </p>
           <div class="cl-btnrow">
-            <a class="cl-btn" href="mailto:hello@cleavehq.com?subject=Cleave%20early%20access">Request access &rarr;</a>
-            <a class="cl-btn cl-btn-ghost" href="#how">How it works</a>
+            <a class="cl-btn" href="/demo/">Open the live demo &rarr;</a>
+            <a class="cl-btn cl-btn-ghost" href="mailto:hello@cleavehq.com?subject=Cleave%20early%20access">Request access</a>
           </div>
           <ul class="cl-claims">
             <li><b>Local-first.</b> Nothing leaves this machine</li>
@@ -937,6 +1007,113 @@
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="cl-wrap">
+        <section class="cl-section cl-fault" id="see">
+          <div class="cl-label">See it</div>
+          <div class="cl-body">
+            <h2 class="cl-h2">The actual interface</h2>
+            <p class="cl-p">
+              Every screen below is a real capture of Cleave running against a
+              synthetic 2,000-identity estate, taken by the same command that
+              produces the documentation. None of it is a mockup, and the
+              numbers in it are the numbers the build actually produces.
+            </p>
+
+            <div class="cl-tour" data-tour>
+              <div class="cl-tourpick" role="tablist" aria-label="Screens">
+                <button class="cl-tourbtn" type="button" role="tab"
+                        aria-selected="true" aria-controls="shot-home">Overview</button>
+                <button class="cl-tourbtn" type="button" role="tab"
+                        aria-selected="false" aria-controls="shot-explorer">Explorer</button>
+                <button class="cl-tourbtn" type="button" role="tab"
+                        aria-selected="false" aria-controls="shot-outliers">Outliers</button>
+                <button class="cl-tourbtn" type="button" role="tab"
+                        aria-selected="false" aria-controls="shot-why-panel">The why panel</button>
+                <button class="cl-tourbtn" type="button" role="tab"
+                        aria-selected="false" aria-controls="shot-sod">Duty conflicts</button>
+                <button class="cl-tourbtn" type="button" role="tab"
+                        aria-selected="false" aria-controls="shot-roles">Role mining</button>
+                <button class="cl-tourbtn" type="button" role="tab"
+                        aria-selected="false" aria-controls="shot-findings">Findings</button>
+                <button class="cl-tourbtn" type="button" role="tab"
+                        aria-selected="false" aria-controls="shot-reports">Reports</button>
+              </div>
+              <figure class="cl-shot is-on" id="shot-home" role="tabpanel">
+                <img class="cl-shot-l" src="shots/light-home.png" width="1280" height="720"
+                     loading="lazy" decoding="async"
+                     alt="Cleave Overview screen, light theme">
+                <img class="cl-shot-d" src="shots/dark-home.png" width="1280" height="720"
+                     loading="lazy" decoding="async" alt="" aria-hidden="true">
+                <figcaption class="cl-cap"><b>Overview.</b> Where a project stands: how many identities and entitlements are loaded, when the last run happened, and what it found.</figcaption>
+              </figure>
+              <figure class="cl-shot" id="shot-explorer" role="tabpanel">
+                <img class="cl-shot-l" src="shots/light-explorer.png" width="1280" height="720"
+                     loading="lazy" decoding="async"
+                     alt="Cleave Explorer screen, light theme">
+                <img class="cl-shot-d" src="shots/dark-explorer.png" width="1280" height="720"
+                     loading="lazy" decoding="async" alt="" aria-hidden="true">
+                <figcaption class="cl-cap"><b>Explorer.</b> Every identity and entitlement, searchable. Access is shown <b>effective</b>, resolved through nested groups, not just what was granted directly.</figcaption>
+              </figure>
+              <figure class="cl-shot" id="shot-outliers" role="tabpanel">
+                <img class="cl-shot-l" src="shots/light-outliers.png" width="1280" height="720"
+                     loading="lazy" decoding="async"
+                     alt="Cleave Outliers screen, light theme">
+                <img class="cl-shot-d" src="shots/dark-outliers.png" width="1280" height="720"
+                     loading="lazy" decoding="async" alt="" aria-hidden="true">
+                <figcaption class="cl-cap"><b>Outliers.</b> People holding access their peer group does not. Ranked by how unusual the grant is and how specific the entitlement is, so an admin group outranks a building pass.</figcaption>
+              </figure>
+              <figure class="cl-shot" id="shot-why-panel" role="tabpanel">
+                <img class="cl-shot-l" src="shots/light-why-panel.png" width="1280" height="720"
+                     loading="lazy" decoding="async"
+                     alt="Cleave The why panel screen, light theme">
+                <img class="cl-shot-d" src="shots/dark-why-panel.png" width="1280" height="720"
+                     loading="lazy" decoding="async" alt="" aria-hidden="true">
+                <figcaption class="cl-cap"><b>The why panel.</b> Every finding opens into its reasoning: which peer group, how many of them hold it, and the parameters the run used. An auditor can check the working.</figcaption>
+              </figure>
+              <figure class="cl-shot" id="shot-sod" role="tabpanel">
+                <img class="cl-shot-l" src="shots/light-sod.png" width="1280" height="720"
+                     loading="lazy" decoding="async"
+                     alt="Cleave Duty conflicts screen, light theme">
+                <img class="cl-shot-d" src="shots/dark-sod.png" width="1280" height="720"
+                     loading="lazy" decoding="async" alt="" aria-hidden="true">
+                <figcaption class="cl-cap"><b>Duty conflicts.</b> Separation-of-duty rules evaluated against effective access, so a conflict assembled out of two nested groups is still caught.</figcaption>
+              </figure>
+              <figure class="cl-shot" id="shot-roles" role="tabpanel">
+                <img class="cl-shot-l" src="shots/light-roles.png" width="1280" height="720"
+                     loading="lazy" decoding="async"
+                     alt="Cleave Role mining screen, light theme">
+                <img class="cl-shot-d" src="shots/dark-roles.png" width="1280" height="720"
+                     loading="lazy" decoding="async" alt="" aria-hidden="true">
+                <figcaption class="cl-cap"><b>Role mining.</b> Candidate roles discovered from what people actually hold, each with the identities and entitlements behind it, exportable as a role model your IGA can consume.</figcaption>
+              </figure>
+              <figure class="cl-shot" id="shot-findings" role="tabpanel">
+                <img class="cl-shot-l" src="shots/light-findings.png" width="1280" height="720"
+                     loading="lazy" decoding="async"
+                     alt="Cleave Findings screen, light theme">
+                <img class="cl-shot-d" src="shots/dark-findings.png" width="1280" height="720"
+                     loading="lazy" decoding="async" alt="" aria-hidden="true">
+                <figcaption class="cl-cap"><b>Findings.</b> Everything a run produced in one place: outliers, duty conflicts, role candidates and hygiene, filterable by kind, severity and status.</figcaption>
+              </figure>
+              <figure class="cl-shot" id="shot-reports" role="tabpanel">
+                <img class="cl-shot-l" src="shots/light-reports.png" width="1280" height="720"
+                     loading="lazy" decoding="async"
+                     alt="Cleave Reports screen, light theme">
+                <img class="cl-shot-d" src="shots/dark-reports.png" width="1280" height="720"
+                     loading="lazy" decoding="async" alt="" aria-hidden="true">
+                <figcaption class="cl-cap"><b>Reports.</b> The executive PDF, a working Excel model, CSV and JSON, and an IGA role export. The whole project stays one portable file.</figcaption>
+              </figure>
+            </div>
+
+            <div class="cl-btnrow" style="margin-top:26px">
+              <a class="cl-btn" href="/demo/">Open the live demo &rarr;</a>
+              <a class="cl-btn cl-btn-ghost" href="cleave-sample-report.pdf">
+                Download a sample report (PDF)
+              </a>
             </div>
           </div>
         </section>
@@ -1480,6 +1657,43 @@
       el.addEventListener("mouseenter", function () { play(el); });
       play(el);
     });
+  })();
+
+  /* ---- the screen tour ---------------------------------------------------
+     Progressive enhancement: the markup stacks all eight figures, and this
+     turns them into a picker. Without JavaScript a reader sees every screen
+     rather than one dead tab bar. */
+  (function () {
+    var tour = document.querySelector("[data-tour]");
+    if (!tour) return;
+    var buttons = [].slice.call(tour.querySelectorAll(".cl-tourbtn"));
+    var shots = [].slice.call(tour.querySelectorAll(".cl-shot"));
+    if (!buttons.length || buttons.length !== shots.length) return;
+    tour.classList.add("cl-tour-on");
+
+    function select(i) {
+      buttons.forEach(function (b, n) {
+        b.setAttribute("aria-selected", n === i ? "true" : "false");
+        b.setAttribute("tabindex", n === i ? "0" : "-1");
+      });
+      shots.forEach(function (sh, n) {
+        if (n === i) sh.classList.add("is-on");
+        else sh.classList.remove("is-on");
+      });
+    }
+
+    buttons.forEach(function (b, i) {
+      b.addEventListener("click", function () { select(i); });
+      b.addEventListener("keydown", function (e) {
+        var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        var next = (i + d + buttons.length) % buttons.length;
+        buttons[next].focus();
+        select(next);
+      });
+    });
+    select(0);
   })();
 </script>
 

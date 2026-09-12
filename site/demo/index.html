@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <title>Cleave demo</title>
+    <meta
+      name="description"
+      content="A read-only demo of Cleave running against a synthetic 2,000-identity estate."
+    />
+    <style>
+      /* The one piece of chrome the demo adds. It floats rather than displacing
+         anything, because the app below it owns the whole viewport and a bar
+         that pushed it down would introduce a scrollbar on every screen.
+
+         Bottom left, under the app's own layers: the detail drawers slide in
+         from the right at z-50 and a badge above them covered the heading of
+         whatever the visitor had just opened. Sitting below them means it is
+         hidden exactly while something more important is on screen. */
+      #demo-badge {
+        position: fixed;
+        bottom: 36px;
+        left: 12px;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(127, 140, 150, 0.45);
+        background: rgba(245, 247, 248, 0.92);
+        color: #1d262c;
+        backdrop-filter: blur(6px);
+        font: 500 12px/1.3 "Segoe UI", system-ui, -apple-system, sans-serif;
+        white-space: nowrap;
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.09);
+      }
+      #demo-badge a {
+        color: #1b6863;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      #demo-badge a:hover {
+        text-decoration: underline;
+      }
+      #demo-badge b {
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 10.5px;
+      }
+      @media (prefers-color-scheme: dark) {
+        #demo-badge {
+          background: rgba(22, 29, 35, 0.92);
+          color: #dde4e9;
+          border-color: rgba(120, 135, 148, 0.4);
+        }
+        #demo-badge a {
+          color: #46a79e;
+        }
+      }
+      @media (max-width: 720px) {
+        #demo-badge .demo-long {
+          display: none;
+        }
+      }
+      #demo-boot {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        font: 400 13px/1.5 "Segoe UI", system-ui, sans-serif;
+        color: #6d7a84;
+        background: #f7f9fa;
+      }
+      @media (prefers-color-scheme: dark) {
+        #demo-boot {
+          background: #0e1317;
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/demo/assets/demo-BFMKSML1.js"></script>
+    <link rel="modulepreload" crossorigin href="/demo/assets/chunk-KS7C4IRE-DMJK28sF.js">
+    <link rel="modulepreload" crossorigin href="/demo/assets/session-DboIBcfx.js">
+    <link rel="stylesheet" crossorigin href="/demo/assets/demo-CY5JRNbI.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="demo-boot">Loading the demo project&hellip;</div>
+    <div id="demo-badge" hidden>
+      <b>Demo</b>
+      <span class="demo-long">Synthetic data, read-only.</span>
+      <a href="https://cleavehq.com/">cleavehq.com</a>
+    </div>
+  </body>
+</html>
