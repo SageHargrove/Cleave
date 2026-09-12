@@ -124,11 +124,11 @@ real customer data.
 
 | | |
 |---|---|
-| Python | ~43,700 lines |
-| TypeScript / React | ~13,700 lines |
-| Tests | 1,076, all green |
-| Engine coverage | 98.4% (gate requires 85%) |
-| Schema | 24 tables, 4 stacked migrations |
+| Python | ~54,000 lines |
+| TypeScript / React | ~12,000 lines, plus ~4,400 generated from the API contract |
+| Tests | 1,327, all green |
+| Engine coverage | 98.5% (gate requires 85%) |
+| Schema | 28 tables, 6 stacked migrations |
 | Dependencies | fully pinned and hashed, SBOM published, `pip-audit` clean |
 | Largest validated run | 3.79M assignments in, 20,220,837 effective-access rows out |
 

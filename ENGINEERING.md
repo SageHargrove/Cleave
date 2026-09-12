@@ -35,7 +35,7 @@ on someone's laptop cannot be Linux-only in practice.
 
 ## Testing
 
-**1,045 tests, all green.** Engine coverage sits at **98.4%** against an 85%
+**1,327 tests, all green.** Engine coverage sits at **98.5%** against an 85%
 floor. Golden-file tests pin analysis output wherever output is stable, so a
 change to scoring shows up as a diff rather than a vibe.
 
